@@ -11,16 +11,48 @@ const button = [
 	{ name: PREV, isEnabled: false },
 	{ name: RESART, isEnabled: false }
 ];
+
 const App = (props) => {
 	const { slides } = props;
+	const [lockResetAndPrev, unlockPrevAndReset, unlockNext, lockNext] = [
+		0,
+		1,
+		slides.length - 2,
+		slides.length - 1
+	];
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [buttons, setButtons] = useState(button);
+	const checkToUpdateNewStateForButtons = (pos) => {
+		const buttonsCopy = [...buttons];
+		switch (pos) {
+			case lockResetAndPrev:
+				buttonsCopy[1].isEnabled = false;
+				buttonsCopy[2].isEnabled = false;
+				buttonsCopy[0].isEnabled = true;
+				break;
+			case unlockPrevAndReset:
+				buttonsCopy[1].isEnabled = true;
+				buttonsCopy[2].isEnabled = true;
+				break;
+			case unlockNext:
+				if (buttonsCopy[0].isEnabled) return;
+				buttonsCopy[0].isEnabled = true;
+				break;
+			case lockNext:
+				buttonsCopy[0].isEnabled = false;
+				break;
+			default:
+				return;
+		}
+		console.log("updating buttons state...");
+		console.log(pos);
+		setButtons(buttonsCopy);
+	};
 
 	const handleClick = (buttonName) => {
 		console.log(buttons[0].isEnabled);
 		let newPos = currentSlide;
 		console.log("new Slide", newPos);
-		const buttonsCopy = [...buttons];
 		switch (buttonName) {
 			case NEXT:
 				++newPos;
@@ -35,42 +67,7 @@ const App = (props) => {
 				break;
 		}
 		setCurrentSlide(newPos);
-		//enabling reset and prev
-		if (newPos > 0 && currentSlide === 0) {
-			buttonsCopy[2].isEnabled = true;
-			buttonsCopy[1].isEnabled = true;
-			setButtons(buttonsCopy);
-			console.log("state on buttons getting updated....");
-			return;
-		}
-
-		if (newPos === slides.length - 1) {
-			buttonsCopy[0].isEnabled = false;
-			console.log("state on buttons getting updated....");
-			setButtons(buttonsCopy);
-			return;
-		}
-
-		if (
-			newPos === 1 ||
-			(newPos === slides.length - 2 && currentSlide === slides.length - 1)
-		) {
-			buttonsCopy[2].isEnabled = true;
-			buttonsCopy[1].isEnabled = true;
-			buttonsCopy[0].isEnabled = true;
-			console.log("state on buttons getting updated....", 2);
-			setButtons(buttonsCopy);
-			return;
-		}
-
-		if (newPos === 0) {
-			buttonsCopy[2].isEnabled = false;
-			buttonsCopy[1].isEnabled = false;
-			buttonsCopy[0].isEnabled = true;
-			console.log("state on buttons getting updated....", 3);
-			setButtons(buttonsCopy);
-			return;
-		}
+		checkToUpdateNewStateForButtons(newPos);
 	};
 	return (
 		<>
