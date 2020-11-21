@@ -4,9 +4,9 @@ import MySlide from "./MySlide";
 import Button from "./Button";
 import "../styles/App.css";
 
-const NEXT = "next";
-const PREV = "prev";
-const RESART = "resart";
+const NEXT = "Next";
+const PREV = "Prev";
+const RESART = "Resart";
 const button = [
 	{ name: NEXT, isEnabled: true },
 	{ name: PREV, isEnabled: false },
