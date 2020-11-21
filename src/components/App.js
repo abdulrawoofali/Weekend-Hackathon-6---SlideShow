@@ -31,6 +31,7 @@ const App = (props) => {
 				buttonsCopy[0].isEnabled = true;
 				break;
 			case unlockPrevAndReset:
+				if (buttonsCopy[1].isEnabled && buttonsCopy[2].isEnabled) return;
 				buttonsCopy[1].isEnabled = true;
 				buttonsCopy[2].isEnabled = true;
 				break;
