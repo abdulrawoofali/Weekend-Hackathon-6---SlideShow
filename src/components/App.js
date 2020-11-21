@@ -1,5 +1,4 @@
 import React, { Component, useState } from "react";
-import slide from "../data";
 import MySlide from "./MySlide";
 import Button from "./Button";
 import "../styles/App.css";
@@ -12,8 +11,8 @@ const button = [
 	{ name: PREV, isEnabled: false },
 	{ name: RESART, isEnabled: false }
 ];
-console.log(slide.length);
 const App = (props) => {
+	const { slide } = props;
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [buttons, setButtons] = useState(button);
 
