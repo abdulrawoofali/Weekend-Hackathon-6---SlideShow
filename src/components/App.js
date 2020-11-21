@@ -23,15 +23,9 @@ const App = (props) => {
 		const buttonsCopy = [...buttons];
 		switch (buttonName) {
 			case NEXT:
-				if (newPos === slides.length - 1) {
-					break;
-				}
 				++newPos;
 				break;
 			case PREV:
-				if (newPos === 0) {
-					break;
-				}
 				--newPos;
 				break;
 			case RESART:
@@ -46,19 +40,25 @@ const App = (props) => {
 			buttonsCopy[2].isEnabled = true;
 			buttonsCopy[1].isEnabled = true;
 			setButtons(buttonsCopy);
+			console.log("state on buttons getting updated....");
 			return;
 		}
 
 		if (newPos === slides.length - 1) {
 			buttonsCopy[0].isEnabled = false;
+			console.log("state on buttons getting updated....");
 			setButtons(buttonsCopy);
 			return;
 		}
 
-		if (newPos > 0 && newPos < slides.length - 1) {
+		if (
+			newPos === 1 ||
+			(newPos === slides.length - 2 && currentSlide === slides.length - 1)
+		) {
 			buttonsCopy[2].isEnabled = true;
 			buttonsCopy[1].isEnabled = true;
 			buttonsCopy[0].isEnabled = true;
+			console.log("state on buttons getting updated....", 2);
 			setButtons(buttonsCopy);
 			return;
 		}
@@ -66,6 +66,8 @@ const App = (props) => {
 		if (newPos === 0) {
 			buttonsCopy[2].isEnabled = false;
 			buttonsCopy[1].isEnabled = false;
+			buttonsCopy[0].isEnabled = true;
+			console.log("state on buttons getting updated....", 3);
 			setButtons(buttonsCopy);
 			return;
 		}
