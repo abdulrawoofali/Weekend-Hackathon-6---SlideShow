@@ -1,18 +1,18 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import MySlide from "./MySlide";
 import Button from "./Button";
 import "../styles/App.css";
 
-const NEXT = "Next";
-const PREV = "Prev";
-const RESART = "Resart";
+const NEXT = "next";
+const PREV = "prev";
+const RESART = "resart";
 const button = [
 	{ name: NEXT, isEnabled: true },
 	{ name: PREV, isEnabled: false },
 	{ name: RESART, isEnabled: false }
 ];
 const App = (props) => {
-	const { slide } = props;
+	const { slides } = props;
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [buttons, setButtons] = useState(button);
 
@@ -23,7 +23,7 @@ const App = (props) => {
 		const buttonsCopy = [...buttons];
 		switch (buttonName) {
 			case NEXT:
-				if (newPos === slide.length - 1) {
+				if (newPos === slides.length - 1) {
 					break;
 				}
 				++newPos;
@@ -49,13 +49,13 @@ const App = (props) => {
 			return;
 		}
 
-		if (newPos === slide.length - 1) {
+		if (newPos === slides.length - 1) {
 			buttonsCopy[0].isEnabled = false;
 			setButtons(buttonsCopy);
 			return;
 		}
 
-		if (newPos > 0 && newPos < slide.length - 1) {
+		if (newPos > 0 && newPos < slides.length - 1) {
 			buttonsCopy[2].isEnabled = true;
 			buttonsCopy[1].isEnabled = true;
 			buttonsCopy[0].isEnabled = true;
@@ -73,8 +73,8 @@ const App = (props) => {
 	return (
 		<>
 			<MySlide
-				title={slide[currentSlide].title}
-				text={slide[currentSlide].text}
+				title={slides[currentSlide].title}
+				text={slides[currentSlide].text}
 			/>
 			{buttons.map((button, index) => (
 				<Button
