@@ -4,6 +4,7 @@ const Button = (props) => {
 	let buttonName = props.name;
 	return (
 		<button
+			id={props.name}
 			data-testid={`button-${props.name}`}
 			onClick={() => props.handleClick(props.name)}
 			disabled={!props.enabled}>
