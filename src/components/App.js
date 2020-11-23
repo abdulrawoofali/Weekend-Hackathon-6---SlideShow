@@ -6,8 +6,9 @@ import "../styles/App.css";
 const App = () => {
 	return (
 		<>
-			<MySlide></MySlide>
-			<ButtonList />
+			<MySlide>
+				<ButtonList />
+			</MySlide>
 		</>
 	);
 };

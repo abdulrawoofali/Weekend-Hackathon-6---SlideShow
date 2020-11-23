@@ -6,6 +6,7 @@ const MySlide = (props) => {
 		<>
 			<h1 data-testid="title">{props.slides[props.slideNo].title}</h1>
 			<p data-testid="text">{props.slides[props.slideNo].text}</p>
+			{props.children}
 		</>
 	);
 };
