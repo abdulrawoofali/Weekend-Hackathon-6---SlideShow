@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import updateSlide from "/sandbox/src/redux/actionCreater";
+import updateSlide from "../../redux/actionCreater";
 const [NEXT, PREV, RESART] = ["next", "prev", "resart"];
 
 const ButtonList = (props) => {
