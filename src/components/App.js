@@ -2,28 +2,21 @@ import React, { Component, useState } from "react";
 import "../styles/App.css";
 const App = (props) => {
 	const { slides } = props;
-	//console.log(props);
-	//console.log(slides.length);
 
-	const [index, setIndex] = useState(0);
+	const [slideNo, setSlideNo] = useState(0);
 
-	let title = slides[index].title;
-	let text = slides[index].text;
+	let title = slides[slideNo].title;
+	let text = slides[slideNo].text;
 
 	function handleClick(action) {
-		//console.log(action);
 		if (action === "prev") {
-			//if (show.index === 0) return;
-
-			let newIndex = index - 1;
-			setIndex(newIndex);
+			let newSlideNo = slideNo - 1;
+			setSlideNo(newSlideNo);
 		} else if (action === "next") {
-			//if (show.index === slides.length - 1) return;
-
-			let newIndex = index + 1;
-			setIndex(newIndex);
+			let newSlideNo = slideNo + 1;
+			setSlideNo(newSlideNo);
 		} else if (action === "restart") {
-			setIndex(0);
+			setSlideNo(0);
 		}
 	}
 
@@ -34,19 +27,19 @@ const App = (props) => {
 			<button
 				onClick={() => handleClick("prev")}
 				data-testid="button-prev"
-				disabled={index === 0 ? true : false}>
+				disabled={slideNo === 0 ? true : false}>
 				Prev
 			</button>
 			<button
 				onClick={() => handleClick("next")}
 				data-testid="button-next"
-				disabled={index === slides.length - 1 ? true : false}>
+				disabled={slideNo === slides.length - 1 ? true : false}>
 				Next
 			</button>
 			<button
 				onClick={() => handleClick("restart")}
 				data-testid="button-restart"
-				disabled={index === 0 ? true : false}>
+				disabled={slideNo === 0 ? true : false}>
 				Restart
 			</button>
 		</>
