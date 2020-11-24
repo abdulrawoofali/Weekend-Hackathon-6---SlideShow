@@ -1,31 +1,30 @@
 import React, { Component, useState } from "react";
 import "../styles/App.css";
-const [NEXT, PREV, RESART] = ["next", "prev", "resart"];
 const App = (props) => {
 	const { slides } = props;
+	//console.log(props);
+	//console.log(slides.length);
 
 	const [index, setIndex] = useState(0);
 
 	let title = slides[index].title;
 	let text = slides[index].text;
 
-	function handleClick(clickedButtonName) {
-		let newPos = index;
-		switch (clickedButtonName) {
-			case NEXT:
-				console.log("dealting next...");
-				++newPos;
-				break;
-			case PREV:
-				--newPos;
-				break;
-			case RESART:
-				newPos = 0;
-				break;
-			default:
-				break;
+	function handleClick(action) {
+		//console.log(action);
+		if (action === "prev") {
+			//if (show.index === 0) return;
+
+			let newIndex = index - 1;
+			setIndex(newIndex);
+		} else if (action === "next") {
+			//if (show.index === slides.length - 1) return;
+
+			let newIndex = index + 1;
+			setIndex(newIndex);
+		} else if (action === "restart") {
+			setIndex(0);
 		}
-		setIndex(newPos);
 	}
 
 	return (
@@ -33,20 +32,20 @@ const App = (props) => {
 			<h1 data-testid="title">{title}</h1>
 			<p data-testid="text">{text}</p>
 			<button
-				onClick={() => handleClick(PREV)}
-				data-testid={`button-${PREV}`}
+				onClick={() => handleClick("prev")}
+				data-testid="button-prev"
 				disabled={index === 0 ? true : false}>
 				Prev
 			</button>
 			<button
-				onClick={() => handleClick(NEXT)}
-				data-testid={`button-${NEXT}`}
+				onClick={() => handleClick("next")}
+				data-testid="button-next"
 				disabled={index === slides.length - 1 ? true : false}>
 				Next
 			</button>
 			<button
-				onClick={() => handleClick(RESART)}
-				data-testid={`button-${RESART}`}
+				onClick={() => handleClick("restart")}
+				data-testid="button-restart"
 				disabled={index === 0 ? true : false}>
 				Restart
 			</button>
